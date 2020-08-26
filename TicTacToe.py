@@ -12,7 +12,7 @@ def show_field():
 
 
 def turn(token, f):
-    
+
     if f == 1:
         field[0][0] = token
     elif f == 2:
@@ -109,4 +109,4 @@ def tic_tac_toe():
             break
 
             
-tictactoe()
+tic_tac_toe()
