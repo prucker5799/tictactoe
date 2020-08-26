@@ -107,3 +107,6 @@ def tic_tac_toe():
         if turns == 0:
             print("The game is a tie. Just TIE again next time hahaha ixde lul rofl lulz.")
             break
+
+            
+tictactoe()
