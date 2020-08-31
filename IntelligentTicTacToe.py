@@ -12,7 +12,6 @@ def show_field():
 
 
 def turn(token, f):
-
     if f == 1:
         field[0][0] = token
     elif f == 2:
@@ -47,7 +46,28 @@ def player_turn():
 
 
 def bot_turn():
-    turn("O", random.choice(choices_left))
+    # Block for 4 outer sides of field
+    if field[0][0] == "X" and field[0][2] == "X" and field[0][1] == "_":
+        turn("O", 2)
+    elif field[0][0] == "X" and field[2][0] == "X" and field[1][0] == "_":
+        turn("O", 4)
+    elif field[2][0] == "X" and field[2][2] == "X" and field[2][1] == "_":
+        turn("O", 8)
+    elif field[2][2] == "X" and field[0][2] == "X" and field[1][2] == "_":
+        turn("O", 6)
+    # Block diagonals
+    elif field[0][0] == "X" and field[2][2] == "X" and field[1][1] == "_":
+        turn("O", 5)
+    elif field[2][0] == "X" and field[0][2] == "X" and field[1][1] == "_":
+        turn("O", 5)
+    # 1.Turn
+    if len(choices_left) == 8:
+        # When player sets in any corner
+        if field[0][0] == "X" or field[0][2] == "X" or field[2][0] == "X" or field[2][2] == "X":
+            turn("O", 5)
+        # When player begins in center
+        # elif field[1][1] == "X":
+        #     turn("O", random.r)
 
 
 def check_combinations(symbol):
@@ -85,19 +105,15 @@ def win():
     return r
 
 
-"""
-def win():
-    if check
-"""
-
-
 def tic_tac_toe():
     turns = 9
     while True:
         player_turn()
+        turns -= 1
         bot_turn()
+        turns -= 1
         show_field()
-        turns -= 2
+        print(len(choices_left))
         if win() == 1:
             print("Player has won. Who else could have, the bot chooses random numbers...")
             break
